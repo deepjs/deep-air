@@ -18,17 +18,12 @@ local encrypted storage driver (store) for deepjs under Adobe AIR
 
 	deep.store("myprotocol")
 	.put({ id:'test', myVar:"hello", myObject:{ myVar2:12344 }})
-	.logState()
-	.patch("patched with query",{id:"test", query:"/myVar"})
-	.logState()
+	.patch("patched with query",{id:"test/myVar"})
 	.get("test")
-	.logState()
-	.put(7777777,{id:"test", query:"/myObject/myVar2"})
-	.logState()
-	.patch({other:true},{id:"test", query:"/myObject/myVar2"})
-	.logState()
+	.log()
+	.put(7777777,{id:"test/myObject/myVar2"})
+	.patch({other:true},{id:"test/myObject/myVar2"})
 	.get("test")
-	.logState();
 ```
 
 ## Object store Usage 
