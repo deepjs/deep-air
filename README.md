@@ -1,12 +1,13 @@
-# deep-local-storage
+# deep-air
+
+local encrypted storage driver (store) for deepjs under Adobe AIR
 
 
-local storage driver (store) for deepjs (based on jstorage) 
+## Collection store Usage 
 
-
-## Usage
-
-	require("deep-local-storage/index").create("myprotocol");
+```javascript 
+	require("deep-air/index");
+	deep.store.air.Collection.create("myprotocol");
 
 	deep.store("myprotocol")
 	.post({ hello:"world" })
@@ -14,8 +15,6 @@ local storage driver (store) for deepjs (based on jstorage)
 	.log();
 
 	deep("myprotocol::?hello=world").log();
-	
-
 
 	deep.store("myprotocol")
 	.put({ id:'test', myVar:"hello", myObject:{ myVar2:12344 }})
@@ -30,3 +29,24 @@ local storage driver (store) for deepjs (based on jstorage)
 	.logState()
 	.get("test")
 	.logState();
+```
+
+## Object store Usage 
+
+```javascript
+	require("deep-air/index");
+	deep.store.air.Object.create("myprotocol");
+
+	deep.store("myprotocol")
+	.post({ hello:"world" },{ id:"/my/path" })
+	.get()
+	.log();
+
+	deep("myprotocol::/my/path").log();
+
+	//...
+
+```
+
+
+
