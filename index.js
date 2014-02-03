@@ -109,5 +109,5 @@ define(["require","deepjs/deep"], function(require, deep){
     };
 
 
-    return deep.store.air.Object;
+    return deep;
 });
