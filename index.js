@@ -6,7 +6,7 @@ if(typeof define !== 'function'){
     var define = require('amdefine')(module);
 }
 
-define(["require","deepjs/deep"], function(require, deep){
+define(["require","deepjs/deep", "deepjs/lib/stores/collection-store", "deepjs/lib/stores/object-store"], function(require, deep){
 
     function writeAirStorage(name, datas)
     {
