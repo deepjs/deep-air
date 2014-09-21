@@ -7,7 +7,7 @@ local encrypted storage driver (store) for deepjs under Adobe AIR
 
 ```javascript 
 	require("deep-air/index");
-	deep.store.air.Collection.create("myprotocol");
+	deep.air.collection("myprotocol");
 
 	deep.restful("myprotocol")
 	.post({ hello:"world" })
@@ -30,7 +30,7 @@ local encrypted storage driver (store) for deepjs under Adobe AIR
 
 ```javascript
 	require("deep-air/index");
-	deep.store.air.Object.create("myprotocol");
+	deep.air.object("myprotocol");
 
 	deep.restful("myprotocol")
 	.post({ hello:"world" },{ id:"/my/path" })
