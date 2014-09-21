@@ -9,14 +9,14 @@ local encrypted storage driver (store) for deepjs under Adobe AIR
 	require("deep-air/index");
 	deep.store.air.Collection.create("myprotocol");
 
-	deep.store("myprotocol")
+	deep.restful("myprotocol")
 	.post({ hello:"world" })
 	.get()
 	.log();
 
 	deep("myprotocol::?hello=world").log();
 
-	deep.store("myprotocol")
+	deep.restful("myprotocol")
 	.put({ id:'test', myVar:"hello", myObject:{ myVar2:12344 }})
 	.patch("patched with query",{id:"test/myVar"})
 	.get("test")
@@ -32,7 +32,7 @@ local encrypted storage driver (store) for deepjs under Adobe AIR
 	require("deep-air/index");
 	deep.store.air.Object.create("myprotocol");
 
-	deep.store("myprotocol")
+	deep.restful("myprotocol")
 	.post({ hello:"world" },{ id:"/my/path" })
 	.get()
 	.log();
