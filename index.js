@@ -6,7 +6,7 @@ if(typeof define !== 'function'){
     var define = require('amdefine')(module);
 }
 
-define(["require","deepjs/deep", "deepjs/lib/stores/collection-store", "deepjs/lib/stores/object-store"], function(require, deep){
+define(["require","deepjs/deep", "deep-restful/lib/collection", "deep-restful/lib/object"], function(require, deep){
 
     function writeAirStorage(name, datas)
     {
@@ -15,20 +15,20 @@ define(["require","deepjs/deep", "deepjs/lib/stores/collection-store", "deepjs/l
         air.EncryptedLocalStore.setItem(name, bytes);
     }
 
-    deep.store.air = {};
+    deep.air = deep.air || {};
     /**
-     * deep.store.air.Collection
+     * deep.air.Object
      * @param  {[type]} protocol                 (optional)[description]
      * @param  {[type]} root                (optional)[description]
      * @param  {[type]} schema                    (optional)[description]
      * @param  {[type]} options    (optional){ path:{ required string }, TTL:{ time to live (ms) }}
      */
-    deep.store.air.Object = deep.compose.Classes(deep.store.Object,
+    deep.air.Object = deep.Classes(deep.Object,
     function(protocol, root, schema, options){
         options = options || {};
         var name = options.name || protocol;
         if(!name)
-            throw deep.errors.Store("deep.store.air.Object need a path at constructor. please provide a options.path or a protocol.");
+            throw deep.errors.Store("deep.air.Object need a path at constructor. please provide a options.path or a protocol.");
         var storedValue = air.EncryptedLocalStore.getItem(name);
         this.name = name;
         if(storedValue)
@@ -38,7 +38,7 @@ define(["require","deepjs/deep", "deepjs/lib/stores/collection-store", "deepjs/l
             this.root = {};
             writeAirStorage(name, this.root);
         }
-        deep.utils.up(options, this);
+        deep.up(this, options);
     },
     {
         post:deep.compose.after(function(result){
@@ -57,9 +57,9 @@ define(["require","deepjs/deep", "deepjs/lib/stores/collection-store", "deepjs/l
             writeAirStorage(this.name, this.root);
         })
     });
-    deep.store.air.Object.create = function(protocol, root, schema, options)
+    deep.air.object = function(protocol, root, schema, options)
     {
-        return new deep.store.air.Object(protocol, root, schema, options);
+        return new deep.air.Object(protocol, root, schema, options);
     };
 
     /**
@@ -69,7 +69,7 @@ define(["require","deepjs/deep", "deepjs/lib/stores/collection-store", "deepjs/l
      * @param  {[type]} schema                    (optional)[description]
      * @param  {[type]} options    (optional){ path:{ required string }, TTL:{ time to live (ms) }}
      */
-    deep.store.air.Collection = deep.compose.Classes(deep.store.Collection,
+    deep.air.Collection = deep.Classes(deep.Collection,
     function(protocol, collection, schema, options){
         options = options || {};
         var name = options.name || protocol;
@@ -84,7 +84,7 @@ define(["require","deepjs/deep", "deepjs/lib/stores/collection-store", "deepjs/l
             this.collection = [];
             writeAirStorage(name, this.collection);
         }
-        deep.utils.up(options, this);
+        deep.up(this, options);
     },
     {
         post:deep.compose.after(function(result){
@@ -103,11 +103,11 @@ define(["require","deepjs/deep", "deepjs/lib/stores/collection-store", "deepjs/l
             writeAirStorage(this.name, this.collection);
         })
     });
-    deep.store.air.Collection.create = function(protocol, collection, schema, options)
+    deep.air.collection = function(protocol, collection, schema, options)
     {
-        return new deep.store.air.Collection(protocol, collection, schema, options);
+        return new deep.air.Collection(protocol, collection, schema, options);
     };
 
 
-    return deep;
+    return deep.air;
 });
